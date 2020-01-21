@@ -1,7 +1,7 @@
 <template>
   <div class="hero-table card">
     <div class="card-body">
-      <input class="form-input mb-2" type="search" placeholder="Filter heroes..." v-model="filter" />
+      <HeroTableSearch class="mb-2" />
       <div class="table-wrapper">
         <table class="table table-striped table-hover">
           <thead>
@@ -29,26 +29,18 @@
 
 <script>
 import HeroRow from "./HeroRow";
+import HeroTableSearch from "./HeroTableSearch";
 import * as Types from "@/store/types";
 
 export default {
   name: "hero-table",
 
   components: {
-    HeroRow
+    HeroRow,
+    HeroTableSearch
   },
 
   computed: {
-    filter: {
-      get() {
-        return this.$store.state.heroFilter;
-      },
-
-      set(value) {
-        this.$store.commit(Types.SET_HERO_FILTER, value);
-      }
-    },
-
     heroes() {
       return this.$store.getters[Types.GET_FILTERED_HEROES];
     }
