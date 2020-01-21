@@ -56,7 +56,7 @@ export default {
 
   methods: {
     removeTeamMember() {
-      this.$store.commit(Types.REMOVE_TEAM_MEMBER, this.hero);
+      this.$store.commit(Types.REMOVE_TEAM_MEMBER, this.index);
     }
   }
 };

@@ -6,9 +6,8 @@ const mutations = {
     state.teamMembers.splice(index, 1, payload);
   },
 
-  [Types.REMOVE_TEAM_MEMBER](state, payload) {
-    const index = state.teamMembers.findIndex(x => x?.id === payload.id);
-    state.teamMembers.splice(index, 1, null);
+  [Types.REMOVE_TEAM_MEMBER](state, value) {
+    state.teamMembers.splice(value, 1, null);
   },
 
   [Types.SELECT_TEAM_MEMBER](state, value) {
