@@ -83,7 +83,12 @@ export default {
 .hero__image {
   align-items: center;
   display: flex;
+  flex: none;
+  height: 475px;
+  margin-right: 10px;
+  overflow: hidden;
   position: relative;
+  width: 390px;
 
   img {
     height: 475px;

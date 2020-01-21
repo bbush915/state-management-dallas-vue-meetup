@@ -16,9 +16,7 @@
             <div
               class="bar-item bg-warning"
               :style="`width:${hitPointsPercentile}%`"
-            >
-              {{ hitPointsPercentile }}%
-            </div>
+            >{{ hitPointsPercentile }}%</div>
           </div>
         </td>
       </tr>
@@ -30,9 +28,7 @@
             <div
               class="bar-item bg-warning"
               :style="`width:${attackPercentile}%`"
-            >
-              {{ attackPercentile }}%
-            </div>
+            >{{ attackPercentile }}%</div>
           </div>
         </td>
       </tr>
@@ -44,9 +40,7 @@
             <div
               class="bar-item bg-warning"
               :style="`width:${speedPercentile}%`"
-            >
-              {{ speedPercentile }}%
-            </div>
+            >{{ speedPercentile }}%</div>
           </div>
         </td>
       </tr>
@@ -58,9 +52,7 @@
             <div
               class="bar-item bg-warning"
               :style="`width:${defensePercentile}%`"
-            >
-              {{ defensePercentile }}%
-            </div>
+            >{{ defensePercentile }}%</div>
           </div>
         </td>
       </tr>
@@ -72,9 +64,7 @@
             <div
               class="bar-item bg-warning"
               :style="`width:${resistancePercentile}%`"
-            >
-              {{ resistancePercentile }}%
-            </div>
+            >{{ resistancePercentile }}%</div>
           </div>
         </td>
       </tr>
@@ -86,9 +76,14 @@
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
 const MAX_HIT_POINTS = 58;
+const MIN_HIT_POINTS = 28;
+const MIN_ATTACK = 19;
 const MAX_ATTACK = 39;
+const MIN_SPEED = 14;
 const MAX_SPEED = 40;
+const MIN_DEFENSE = 11;
 const MAX_DEFENSE = 40;
+const MIN_RESISTANCE = 11;
 const MAX_RESISTANCE = 39;
 
 export default {
@@ -109,7 +104,11 @@ export default {
     },
 
     hitPointsPercentile() {
-      return Math.round((this.hitPoints / MAX_HIT_POINTS) * 100);
+      return Math.round(
+        ((this.hitPoints - MIN_HIT_POINTS) /
+          (MAX_HIT_POINTS - MIN_HIT_POINTS)) *
+          100
+      );
     },
 
     attack() {
@@ -117,7 +116,9 @@ export default {
     },
 
     attackPercentile() {
-      return Math.round((this.attack / MAX_ATTACK) * 100);
+      return Math.round(
+        ((this.attack - MIN_ATTACK) / (MAX_ATTACK - MIN_ATTACK)) * 100
+      );
     },
 
     speed() {
@@ -125,7 +126,9 @@ export default {
     },
 
     speedPercentile() {
-      return Math.round((this.speed / MAX_SPEED) * 100);
+      return Math.round(
+        ((this.speed - MIN_SPEED) / (MAX_SPEED - MIN_SPEED)) * 100
+      );
     },
 
     defense() {
@@ -136,7 +139,9 @@ export default {
     },
 
     defensePercentile() {
-      return Math.round((this.defense / MAX_DEFENSE) * 100);
+      return Math.round(
+        ((this.defense - MIN_DEFENSE) / (MAX_DEFENSE - MIN_DEFENSE)) * 100
+      );
     },
 
     resistance() {
@@ -147,7 +152,11 @@ export default {
     },
 
     resistancePercentile() {
-      return Math.round((this.resistance / MAX_RESISTANCE) * 100);
+      return Math.round(
+        ((this.resistance - MIN_RESISTANCE) /
+          (MAX_RESISTANCE - MIN_RESISTANCE)) *
+          100
+      );
     }
   }
 };
