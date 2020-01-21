@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import addTeamMemberMutation from "@/apollo/mutations/add-team-member.graphql";
+import getTeamMembersQuery from "@/apollo/queries/get-team-members.graphql";
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
 export default {
@@ -76,12 +78,23 @@ export default {
     },
 
     canAddTeamMember() {
-      return false;
+      return this.teamMembers.some(x => !x);
     }
   },
 
   methods: {
-    addTeamMember() {}
+    async addTeamMember() {
+      await this.$apollo.mutate({
+        mutation: addTeamMemberMutation,
+        variables: { hero: this.hero }
+      });
+    }
+  },
+
+  apollo: {
+    teamMembers: {
+      query: getTeamMembersQuery
+    }
   }
 };
 </script>

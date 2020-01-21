@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import removeTeamMemberMutation from "@/apollo/mutations/remove-team-member.graphql";
+import getSelectedTeamMemberIndexQuery from "@/apollo/queries/get-selected-team-member-index.graphql";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
 export default {
@@ -41,7 +43,7 @@ export default {
 
   computed: {
     isSelected() {
-      return false;
+      return this.index === this.selectedTeamMemberIndex;
     },
 
     heroAvatarUrl() {
@@ -54,7 +56,18 @@ export default {
   },
 
   methods: {
-    removeTeamMember() {}
+    async removeTeamMember() {
+      await this.$apollo.mutate({
+        mutation: removeTeamMemberMutation,
+        variables: { index: this.index }
+      });
+    }
+  },
+
+  apollo: {
+    selectedTeamMemberIndex: {
+      query: getSelectedTeamMemberIndexQuery
+    }
   }
 };
 </script>

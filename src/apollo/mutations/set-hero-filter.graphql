@@ -1,0 +1,3 @@
+mutation SetHeroFilter($value: String!) {
+  setHeroFilter(value: $value) @client
+}

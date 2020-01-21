@@ -12,6 +12,8 @@
 
 <script>
 import TeamMember from "./TeamMember";
+import getTeamMembersQuery from "@/apollo/queries/get-team-members.graphql";
+import selectTeamMemberMutation from "@/apollo/mutations/select-team-member.graphql";
 
 export default {
   name: "team-members",
@@ -20,14 +22,19 @@ export default {
     TeamMember
   },
 
-  computed: {
-    teamMembers() {
-      return [];
+  methods: {
+    async selectTeamMember(index) {
+      await this.$apollo.mutate({
+        mutation: selectTeamMemberMutation,
+        variables: { index }
+      });
     }
   },
 
-  methods: {
-    selectTeamMember() {}
+  apollo: {
+    teamMembers: {
+      query: getTeamMembersQuery
+    }
   }
 };
 </script>

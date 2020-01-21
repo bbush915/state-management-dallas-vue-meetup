@@ -1,7 +1,8 @@
 import Vue from "vue";
 
 import App from "./App";
-import { apolloProvider } from "./plugins/vue-apollo";
+import { apolloProvider } from "./apollo/provider";
+import "./plugins/vue-apollo";
 
 Vue.config.productionTip = false;
 

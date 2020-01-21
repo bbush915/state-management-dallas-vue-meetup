@@ -1,0 +1,3 @@
+mutation AddTeamMember($hero: Hero!) {
+  addTeamMember(hero: $hero) @client
+}

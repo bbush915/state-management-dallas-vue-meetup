@@ -33,6 +33,8 @@
 
 <script>
 import TeamMemberDetailsTable from "./TeamMemberDetailsTable";
+import getSelectedTeamMemberIndexQuery from "@/apollo/queries/get-selected-team-member-index.graphql";
+import getTeamMembersQuery from "@/apollo/queries/get-team-members.graphql";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
 export default {
@@ -44,7 +46,7 @@ export default {
 
   computed: {
     hero() {
-      return null;
+      return this.teamMembers[this.selectedTeamMemberIndex];
     },
 
     heroImageUrl() {
@@ -62,6 +64,16 @@ export default {
       const movementType = this.hero.movementType.name;
 
       return getAssetUrl(`unit-builder/MovementType_${movementType}.png`);
+    }
+  },
+
+  apollo: {
+    teamMembers: {
+      query: getTeamMembersQuery
+    },
+
+    selectedTeamMemberIndex: {
+      query: getSelectedTeamMemberIndexQuery
     }
   }
 };

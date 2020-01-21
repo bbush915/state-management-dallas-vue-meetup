@@ -1,0 +1,3 @@
+mutation SelectTeamMember($index: Int!) {
+  selectTeamMember(index: $index) @client
+}

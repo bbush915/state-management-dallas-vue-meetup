@@ -1,0 +1,12 @@
+type LocalState {
+  heroFilter: String
+  selectedTeamMemberIndex: Int!
+  teamMembers: [Hero]!
+}
+
+extend type Mutation {
+  addTeamMember(hero: Hero!): Hero!
+  removeTeamMember(index: Int!): Int!
+  selectTeamMember(index: Int!): Int!
+  setHeroFilter(value: String!): String!
+}

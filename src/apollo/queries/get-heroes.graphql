@@ -1,0 +1,33 @@
+query GetHeroes {
+  heroes @client {
+    id
+    name
+    title
+    description
+    identifier
+    movementType {
+      name
+      displayValue
+    }
+    weaponType {
+      color {
+        name
+        displayValue
+      }
+      weapon {
+        name
+        displayValue
+      }
+    }
+    baseHitPoints
+    hitPointsGrowthRate
+    baseAttack
+    attackGrowthRate
+    baseSpeed
+    speedGrowthRate
+    baseDefense
+    defenseGrowthRate
+    baseResistance
+    resistanceGrowthRate
+  }
+}

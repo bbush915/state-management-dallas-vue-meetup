@@ -1,0 +1,3 @@
+mutation RemoveTeamMember($index: Int!) {
+  removeTeamMember(index: $index) @client
+}

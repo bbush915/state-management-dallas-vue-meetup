@@ -1,0 +1,3 @@
+query GetSelectedTeamMemberIndex {
+  selectedTeamMemberIndex @client
+}
