@@ -1,6 +1,8 @@
 <template>
   <ApolloQuery :query="require('@/apollo/queries/fetch-heroes.graphql')">
-    <slot />
+    <template v-slot="{}">
+      <slot />
+    </template>
   </ApolloQuery>
 </template>
 

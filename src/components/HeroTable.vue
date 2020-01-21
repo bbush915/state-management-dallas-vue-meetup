@@ -2,13 +2,7 @@
   <FetchHeroes>
     <div class="hero-table card">
       <div class="card-body">
-        <input
-          class="form-input mb-2"
-          type="search"
-          placeholder="Filter heroes..."
-          :value="filter"
-          @input="setFilter($event.target.value)"
-        />
+        <HeroTableSearch class="mb-2" />
         <div class="table-wrapper">
           <table class="table table-striped table-hover">
             <thead>
@@ -44,14 +38,15 @@ import HeroRow from "./HeroRow";
 import FetchHeroes from "@/apollo/components/FetchHeroes";
 import getHeroFilterQuery from "@/apollo/queries/get-hero-filter.graphql";
 import getHeroesQuery from "@/apollo/queries/get-heroes.graphql";
-import setHeroFilterMutation from "@/apollo/mutations/set-hero-filter.graphql";
+import HeroTableSearch from "@/components/HeroTableSearch";
 
 export default {
   name: "hero-table",
 
   components: {
     FetchHeroes,
-    HeroRow
+    HeroRow,
+    HeroTableSearch
   },
 
   data() {
@@ -68,15 +63,6 @@ export default {
 
       return this.heroes.filter(hero => {
         return hero.name.toLowerCase().includes(this.filter.toLowerCase());
-      });
-    }
-  },
-
-  methods: {
-    async setFilter(value) {
-      await this.$apollo.mutate({
-        mutation: setHeroFilterMutation,
-        variables: { value }
       });
     }
   },
