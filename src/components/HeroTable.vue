@@ -1,16 +1,8 @@
 <template>
   <div class="hero-table card">
     <div class="card-body">
-      <section>
-        <h3>Available Heroes</h3>
-        <p>Use the table below to add heroes to your party.</p>
-      </section>
-      <section>
-        <input
-          class="form-input mb-2"
-          type="search"
-          placeholder="Filter heroes..."
-        />
+      <input class="form-input mb-2" type="search" placeholder="Filter heroes..." v-model="filter" />
+      <div class="table-wrapper">
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -30,13 +22,14 @@
             <HeroRow v-for="hero in heroes" :key="hero.id" :hero="hero" />
           </tbody>
         </table>
-      </section>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import HeroRow from "./HeroRow";
+import * as Types from "@/store/types";
 
 export default {
   name: "hero-table",
@@ -45,45 +38,34 @@ export default {
     HeroRow
   },
 
-  data() {
-    return {
-      heroes: [
-        {
-          name: "Alfonse",
-          title: "Prince of Askr",
-          uuid: "e89e50a69ba251fcb7c18ebcc767f0af",
-          weaponType: {
-            color: {
-              name: "RED",
-              displayValue: "Red"
-            },
-            weapon: {
-              name: "SWORD",
-              displayValue: "Sword"
-            }
-          },
-          movementType: {
-            name: "INFANTRY",
-            displayValue: "Infantry"
-          },
-          baseHitPoints: 17,
-          hitPointsGrowthRate: 55,
-          baseAttack: 7,
-          attackGrowthRate: 60,
-          baseSpeed: 4,
-          speedGrowthRate: 45,
-          baseDefense: 6,
-          defenseGrowthRate: 55,
-          baseResistance: 3,
-          resistanceGrowthRate: 40
-        }
-      ]
-    };
+  computed: {
+    filter: {
+      get() {
+        return this.$store.state.heroFilter;
+      },
+
+      set(value) {
+        this.$store.commit(Types.SET_HERO_FILTER, value);
+      }
+    },
+
+    heroes() {
+      return this.$store.getters[Types.GET_FILTERED_HEROES];
+    }
+  },
+
+  async created() {
+    await this.$store.dispatch(Types.FETCH_HEROES);
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.table-wrapper {
+  height: 350px;
+  overflow: auto;
+}
+
 table {
   table-layout: fixed;
 }

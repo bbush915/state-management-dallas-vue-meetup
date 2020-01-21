@@ -2,9 +2,9 @@
   <header class="navbar bg-primary">
     <div class="backdrop" />
     <section class="navbar-center">
-      <a href="" class="navbar-brand text-light">
-        <img class="mr-1" src="@/assets/logo.png" width="40" height="40" />
-        Team Builder
+      <a href class="navbar-brand text-light">
+        <img class="mr-2" src="@/assets/logo.png" width="40" height="40" />
+        <div class="h5">Team Builder</div>
       </a>
     </section>
   </header>

@@ -1,11 +1,18 @@
 <template>
   <div class="team-members">
-    <TeamMember v-for="i in 5" :key="i" :hero="heroes[i - 1]" />
+    <TeamMember
+      v-for="i in 5"
+      :key="i"
+      :hero="teamMembers[i - 1]"
+      :index="i - 1"
+      @click.native="selectTeamMember(i - 1)"
+    />
   </div>
 </template>
 
 <script>
 import TeamMember from "./TeamMember";
+import * as Types from "@/store/types";
 
 export default {
   name: "team-members",
@@ -14,24 +21,16 @@ export default {
     TeamMember
   },
 
-  data() {
-    return {
-      heroes: [
-        {
-          name: "Alfonse",
-          title: "Prince of Askr",
-          uuid: "E89E50A69BA251FCB7C18EBCC767F0AF"
-        },
-        {
-          name: "Sharena",
-          title: "Princess of Askr",
-          uuid: "F39640FD65D455ACA516A17B2A657D7E"
-        },
-        null,
-        null,
-        null
-      ]
-    };
+  computed: {
+    teamMembers() {
+      return this.$store.state.teamMembers;
+    }
+  },
+
+  methods: {
+    selectTeamMember(index) {
+      this.$store.commit(Types.SELECT_TEAM_MEMBER, index);
+    }
   }
 };
 </script>

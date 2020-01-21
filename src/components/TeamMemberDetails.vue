@@ -1,10 +1,10 @@
 <template>
   <div class="team-member-details card">
-    <div class="card-body">
+    <div v-if="hero" class="card-body">
       <div class="hero__image">
-        <img :src="heroImageUrl" alt="" />
-        <img class="weapon-type" :src="weaponTypeImageUrl" alt="" />
-        <img class="movement-type" :src="movementTypeImageUrl" alt="" />
+        <img :src="heroImageUrl" alt />
+        <img class="weapon-type" :src="weaponTypeImageUrl" alt />
+        <img class="movement-type" :src="movementTypeImageUrl" alt />
       </div>
       <div class="hero__information">
         <section>
@@ -13,10 +13,7 @@
         </section>
         <section>
           <blockquote>
-            <p>
-              A prince of Askr and member of the Order of Heroes. Kind and
-              serious, and eager to maintain peace.
-            </p>
+            <p>{{ hero.description }}</p>
           </blockquote>
         </section>
         <section>
@@ -24,11 +21,19 @@
         </section>
       </div>
     </div>
+    <div v-else class="card-body empty">
+      <i class="icon icon-4x icon-people" />
+      <div class="empty-title h5">Empty</div>
+      <div
+        class="empty-subtitle"
+      >Select a non-empty team member on the left to view detailed information.</div>
+    </div>
   </div>
 </template>
 
 <script>
 import TeamMemberDetailsTable from "./TeamMemberDetailsTable";
+import * as Types from "@/store/types";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
 export default {
@@ -38,40 +43,13 @@ export default {
     TeamMemberDetailsTable
   },
 
-  data() {
-    return {
-      hero: {
-        name: "Alfonse",
-        title: "Prince of Askr",
-        uuid: "e89e50a69ba251fcb7c18ebcc767f0af",
-        weaponType: {
-          color: {
-            name: "RED"
-          },
-          weapon: {
-            name: "SWORD"
-          }
-        },
-        movementType: {
-          name: "INFANTRY"
-        },
-        baseHitPoints: 17,
-        hitPointsGrowthRate: 55,
-        baseAttack: 7,
-        attackGrowthRate: 60,
-        baseSpeed: 4,
-        speedGrowthRate: 45,
-        baseDefense: 6,
-        defenseGrowthRate: 55,
-        baseResistance: 3,
-        resistanceGrowthRate: 40
-      }
-    };
-  },
-
   computed: {
+    hero() {
+      return this.$store.getters[Types.GET_SELECTED_TEAM_MEMBER];
+    },
+
     heroImageUrl() {
-      return getAssetUrl(`heroes/${this.hero.uuid}/Face.png`);
+      return getAssetUrl(`heroes/${this.hero.identifier}/Face.png`);
     },
 
     weaponTypeImageUrl() {
@@ -94,6 +72,12 @@ export default {
 .team-member-details > div {
   display: flex;
   flex-direction: row;
+
+  &.empty {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .hero__image {

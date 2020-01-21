@@ -10,12 +10,17 @@
     <td>{{ defense }}</td>
     <td>{{ resistance }}</td>
     <td>
-      <button class="btn btn-success">Add to Team</button>
+      <button
+        class="btn btn-success"
+        :disabled="!canAddTeamMember"
+        @click="addTeamMember"
+      >Add to Team</button>
     </td>
   </tr>
 </template>
 
 <script>
+import * as Types from "@/store/types";
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
 export default {
@@ -67,6 +72,16 @@ export default {
         this.hero.baseResistance,
         this.hero.resistanceGrowthRate
       );
+    },
+
+    canAddTeamMember() {
+      return this.$store.state.teamMembers.some(x => !x);
+    }
+  },
+
+  methods: {
+    addTeamMember() {
+      this.$store.commit(Types.ADD_TEAM_MEMBER, this.hero);
     }
   }
 };
