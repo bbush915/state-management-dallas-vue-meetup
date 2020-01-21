@@ -24,16 +24,15 @@
     <div v-else class="card-body empty">
       <i class="icon icon-4x icon-people" />
       <div class="empty-title h5">Empty</div>
-      <div
-        class="empty-subtitle"
-      >Select a non-empty team member on the left to view detailed information.</div>
+      <div class="empty-subtitle">
+        Select a non-empty team member on the left to view detailed information.
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import TeamMemberDetailsTable from "./TeamMemberDetailsTable";
-import * as Types from "@/store/types";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
 export default {
@@ -45,7 +44,7 @@ export default {
 
   computed: {
     hero() {
-      return this.$store.getters[Types.GET_SELECTED_TEAM_MEMBER];
+      return null;
     },
 
     heroImageUrl() {

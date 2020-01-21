@@ -12,7 +12,6 @@
 
 <script>
 import TeamMember from "./TeamMember";
-import * as Types from "@/store/types";
 
 export default {
   name: "team-members",
@@ -23,14 +22,12 @@ export default {
 
   computed: {
     teamMembers() {
-      return this.$store.state.teamMembers;
+      return [];
     }
   },
 
   methods: {
-    selectTeamMember(index) {
-      this.$store.commit(Types.SELECT_TEAM_MEMBER, index);
-    }
+    selectTeamMember() {}
   }
 };
 </script>

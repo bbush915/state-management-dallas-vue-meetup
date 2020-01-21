@@ -1,7 +1,12 @@
 <template>
   <div class="hero-table card">
     <div class="card-body">
-      <input class="form-input mb-2" type="search" placeholder="Filter heroes..." v-model="filter" />
+      <input
+        class="form-input mb-2"
+        type="search"
+        placeholder="Filter heroes..."
+        v-model="filter"
+      />
       <div class="table-wrapper">
         <table class="table table-striped table-hover">
           <thead>
@@ -29,7 +34,6 @@
 
 <script>
 import HeroRow from "./HeroRow";
-import * as Types from "@/store/types";
 
 export default {
   name: "hero-table",
@@ -41,22 +45,18 @@ export default {
   computed: {
     filter: {
       get() {
-        return this.$store.state.heroFilter;
+        return null;
       },
 
-      set(value) {
-        this.$store.commit(Types.SET_HERO_FILTER, value);
-      }
+      set() {}
     },
 
     heroes() {
-      return this.$store.getters[Types.GET_FILTERED_HEROES];
+      return [];
     }
   },
 
-  async created() {
-    await this.$store.dispatch(Types.FETCH_HEROES);
-  }
+  async created() {}
 };
 </script>
 

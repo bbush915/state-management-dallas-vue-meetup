@@ -14,13 +14,14 @@
         class="btn btn-success"
         :disabled="!canAddTeamMember"
         @click="addTeamMember"
-      >Add to Team</button>
+      >
+        Add to Team
+      </button>
     </td>
   </tr>
 </template>
 
 <script>
-import * as Types from "@/store/types";
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
 export default {
@@ -75,14 +76,12 @@ export default {
     },
 
     canAddTeamMember() {
-      return this.$store.state.teamMembers.some(x => !x);
+      return false;
     }
   },
 
   methods: {
-    addTeamMember() {
-      this.$store.commit(Types.ADD_TEAM_MEMBER, this.hero);
-    }
+    addTeamMember() {}
   }
 };
 </script>

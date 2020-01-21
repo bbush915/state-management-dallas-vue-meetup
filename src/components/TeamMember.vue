@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import * as Types from "@/store/types";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
 export default {
@@ -42,7 +41,7 @@ export default {
 
   computed: {
     isSelected() {
-      return this.index === this.$store.state.selectedTeamMemberIndex;
+      return false;
     },
 
     heroAvatarUrl() {
@@ -55,9 +54,7 @@ export default {
   },
 
   methods: {
-    removeTeamMember() {
-      this.$store.commit(Types.REMOVE_TEAM_MEMBER, this.index);
-    }
+    removeTeamMember() {}
   }
 };
 </script>
