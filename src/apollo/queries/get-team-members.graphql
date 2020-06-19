@@ -4,21 +4,9 @@ query GetTeamMembers {
     name
     title
     description
-    identifier
-    movementType {
-      name
-      displayValue
-    }
-    weaponType {
-      color {
-        name
-        displayValue
-      }
-      weapon {
-        name
-        displayValue
-      }
-    }
+    movementType
+    color
+    weapon
     baseHitPoints
     hitPointsGrowthRate
     baseAttack
