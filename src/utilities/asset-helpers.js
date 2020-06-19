@@ -1,5 +1,5 @@
-const API_URL = process.env.VUE_APP_API_URL;
+const ASSET_URL = process.env.VUE_APP_ASSET_URL;
 
 export function getAssetUrl(assetPath) {
-  return `${API_URL}/images/${assetPath}`;
+  return `${ASSET_URL}/images/${assetPath}`;
 }

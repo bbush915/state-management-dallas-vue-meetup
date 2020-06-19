@@ -24,6 +24,9 @@
 <script>
 import addTeamMemberMutation from "@/apollo/mutations/add-team-member.graphql";
 import getTeamMembersQuery from "@/apollo/queries/get-team-members.graphql";
+import Colors from "@/data/colors";
+import MovementTypes from "@/data/movement-types";
+import Weapons from "@/data/weapons";
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
 export default {
@@ -32,18 +35,18 @@ export default {
   props: {
     hero: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
     movementType() {
-      return this.hero.movementType.displayValue;
+      return MovementTypes[this.hero.movementType];
     },
 
     weaponType() {
-      const color = this.hero.weaponType.color.displayValue;
-      const weapon = this.hero.weaponType.weapon.displayValue;
+      const color = Colors[this.hero.color];
+      const weapon = Weapons[this.hero.weapon];
 
       return `${color} ${weapon}`;
     },
@@ -78,23 +81,23 @@ export default {
     },
 
     canAddTeamMember() {
-      return this.teamMembers.some(x => !x);
-    }
+      return this.teamMembers.some((x) => !x);
+    },
   },
 
   methods: {
     async addTeamMember() {
       await this.$apollo.mutate({
         mutation: addTeamMemberMutation,
-        variables: { hero: this.hero }
+        variables: { hero: this.hero },
       });
-    }
+    },
   },
 
   apollo: {
     teamMembers: {
-      query: getTeamMembersQuery
-    }
-  }
+      query: getTeamMembersQuery,
+    },
+  },
 };
 </script>
