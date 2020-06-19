@@ -33,6 +33,9 @@
 
 <script>
 import TeamMemberDetailsTable from "./TeamMemberDetailsTable";
+import Colors from "@/data/colors";
+import MovementTypes from "@/data/movement-types";
+import Weapons from "@/data/weapons";
 import * as Types from "@/store/types";
 import { getAssetUrl } from "@/utilities/asset-helpers";
 
@@ -49,20 +52,20 @@ export default {
     },
 
     heroImageUrl() {
-      return getAssetUrl(`heroes/${this.hero.identifier}/Face.png`);
+      return getAssetUrl(`heroes/${this.hero.id}/default.png`);
     },
 
     weaponTypeImageUrl() {
-      const color = this.hero.weaponType.color.name;
-      const weapon = this.hero.weaponType.weapon.name;
+      const color = Colors[this.hero.color].toLowerCase();
+      const weapon = Weapons[this.hero.weapon].toLowerCase();
 
-      return getAssetUrl(`unit-builder/WeaponType_${color}_${weapon}.png`);
+      return getAssetUrl(`unit-builder/weapon-type_${color}_${weapon}.png`);
     },
 
     movementTypeImageUrl() {
-      const movementType = this.hero.movementType.name;
+      const movementType = MovementTypes[this.hero.movementType].toLowerCase();
 
-      return getAssetUrl(`unit-builder/MovementType_${movementType}.png`);
+      return getAssetUrl(`unit-builder/movement-type_${movementType}.png`);
     }
   }
 };

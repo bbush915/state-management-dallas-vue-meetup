@@ -20,6 +20,9 @@
 </template>
 
 <script>
+import Colors from "@/data/colors";
+import MovementTypes from "@/data/movement-types";
+import Weapons from "@/data/weapons";
 import * as Types from "@/store/types";
 import { getMaxLevelValue } from "@/utilities/statistic-helpers";
 
@@ -35,12 +38,12 @@ export default {
 
   computed: {
     movementType() {
-      return this.hero.movementType.displayValue;
+      return MovementTypes[this.hero.movementType];
     },
 
     weaponType() {
-      const color = this.hero.weaponType.color.displayValue;
-      const weapon = this.hero.weaponType.weapon.displayValue;
+      const color = Colors[this.hero.color];
+      const weapon = Weapons[this.hero.weapon];
 
       return `${color} ${weapon}`;
     },
