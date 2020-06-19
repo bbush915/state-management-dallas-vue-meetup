@@ -50,7 +50,7 @@ export default {
         return undefined;
       }
 
-      return getAssetUrl(`heroes/${this.hero.identifier}/Face_FC.png`);
+      return getAssetUrl(`heroes/${this.hero.id}/thumbnail.png`);
     }
   },
 
